@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=4 uid="uid://6jdw562kebg6"]
+
+[ext_resource type="Texture2D" uid="uid://dikmqe05l7pfy" path="res://assets/virus.png" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://00dhl5vd7tbf" path="res://scenes/scripts/player.gd" id="1_v6fml"]
+[ext_resource type="Script" uid="uid://c13gosndqilws" path="res://scenes/scripts/playerarea.gd" id="2_3li8b"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v6fml"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-16, -16, 0, 32, 32, 0),
+"attribute_data": PackedByteArray("zczkPgAAAAAAACA+AAAAAAAAID4AACA+AAAAAAAAID4AAAAAAAAAPwAAwD0zM2s/AADAPTMzfz8zMxM+AACAP2ZmXj8AAIA/AABwP2Zmbj8AAHA/MzNPP2ZmWj/NzEA/AACAPwAAED8AAIA/zcykPgAAaD8AAKA9AABoPwAAAADNzFQ/AAAAAJqZJT8AAIA9"),
+"format": 34393296913,
+"index_count": 48,
+"index_data": PackedByteArray("EQAQAA8ADgANAAwACwAKAAkACQAIAAcABwAGAAUABQAEAAMAAgABAAAAEQAPAA4ADgAMAAsACwAJAAcABwAFAAMAAgAAABEAEQAOAAsACwAHAAMAAgARAAsACwADAAIA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("mJnZvwAAgMEAADDBAACAwQAAMMEAADDBAACAwQAAMMEAAIDBAAAAAAAAUMFmZlZBAABQwWZmfkFmZjbBAACAQczMPEEAAIBBAABgQczMXEEAAGBBZmYeQczMNEGamQFBAACAQQAAAEAAAIBBZma2wAAAUEEAAFjBAABQQQAAgMGamSlBAACAwWhmlkAAAGDB")
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+size = Vector2(25, 24)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_v6fml")
+
+[node name="playerarea" type="Area2D" parent="."]
+script = ExtResource("2_3li8b")
+
+[node name="Virus" type="MeshInstance2D" parent="playerarea"]
+position = Vector2(0, -1)
+mesh = SubResource("ArrayMesh_v6fml")
+texture = ExtResource("1_p0vlq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerarea"]
+shape = SubResource("RectangleShape2D_3li8b")
+
+[connection signal="body_entered" from="playerarea" to="playerarea" method="_on_body_entered"]

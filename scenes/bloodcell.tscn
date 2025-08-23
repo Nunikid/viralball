@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b70q1pcna4lxb"]
+
+[ext_resource type="Texture2D" uid="uid://0adly6x7u3gl" path="res://assets/blood cell.png" id="1_upula"]
+
+[node name="bloodcell" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="BloodCell" type="Sprite2D" parent="."]
+position = Vector2(0, 0.299999)
+texture = ExtResource("1_upula")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 0.299999)
+polygon = PackedVector2Array(-6, -15, -8, -14, -12, -10, -14, -8, -14, 6.9, -6, 15, 5, 15, 14, 4, 15, 0, 16, -4, 15, -7, 11, -12, 7, -16)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -0.700001)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb6wh40cdcrm"]
+
+[ext_resource type="Script" uid="uid://bj03fm3cllq7c" path="res://scenes/whitecell.gd" id="1_q4di2"]
+[ext_resource type="Texture2D" uid="uid://bd7qf2bjkt3hm" path="res://assets/white cell.png" id="1_t5fi3"]
+
+[node name="whitecell" type="RigidBody2D"]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("1_q4di2")
+
+[node name="WhiteCell" type="Sprite2D" parent="."]
+position = Vector2(-0.209999, -2)
+texture = ExtResource("1_t5fi3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.209999, -2)
+polygon = PackedVector2Array(-6, -15, -6, -12.9, -11.7, -8, -14, -8, -14, 6.9, -4.8, 15, 4.9, 15, 12.9, 6, 15.3, 6, 14, -4, 14, -7, 6, -13, 6, -15)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

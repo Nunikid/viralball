@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4usilvf82mhb"]
+
+[ext_resource type="AudioStream" uid="uid://cn3ss5yoahqan" path="res://assets/music/VirusTheme.mp3" id="1_0rulj"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+
+[node name="VirusTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_0rulj")
+autoplay = true

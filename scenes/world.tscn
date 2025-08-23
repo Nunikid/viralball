@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjca2rcmpqtcb"]
+
+[ext_resource type="PackedScene" uid="uid://6jdw562kebg6" path="res://scenes/Player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://c73obqt2pxc7l" path="res://scenes/world.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://bb6wh40cdcrm" path="res://scenes/whitecell.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://b4usilvf82mhb" path="res://scenes/background_music.tscn" id="3_71j4m"]
+[ext_resource type="PackedScene" uid="uid://b70q1pcna4lxb" path="res://scenes/bloodcell.tscn" id="3_qfnet"]
+[ext_resource type="PackedScene" uid="uid://c71e2ytgkf18x" path="res://scenes/hud.tscn" id="4_k0juu"]
+[ext_resource type="AudioStream" uid="uid://dgafakdn25hj2" path="res://assets/sfx/eat.wav" id="7_i7141"]
+
+[sub_resource type="Curve2D" id="Curve2D_4wyf3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 640, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="World" type="Node"]
+script = ExtResource("1_rwgxs")
+whitecell_scene = ExtResource("2_4wyf3")
+bloodcell_scene = ExtResource("3_qfnet")
+
+[node name="BackgroundMusic" parent="." instance=ExtResource("3_71j4m")]
+
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+position = Vector2(560, 301)
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(563, 301)
+
+[node name="WhiteCellTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4wyf3")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="HUD" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="BloodCellTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="ConsumeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i7141")
+volume_db = -3.0
+
+[connection signal="blood_collected" from="Player" to="." method="_on_player_blood_collected"]
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="timeout" from="WhiteCellTimer" to="." method="_on_white_cell_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="BloodCellTimer" to="." method="_on_blood_cell_timer_timeout"]
