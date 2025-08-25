@@ -6,4 +6,5 @@
 
 [node name="VirusTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_0rulj")
+volume_db = -10.0
 autoplay = true

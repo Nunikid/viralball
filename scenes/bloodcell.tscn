@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b70q1pcna4lxb"]
+[gd_scene load_steps=3 format=3 uid="uid://b70q1pcna4lxb"]
 
+[ext_resource type="Script" uid="uid://bt6u36lepp2i7" path="res://scenes/scripts/bloodcell.gd" id="1_h22qs"]
 [ext_resource type="Texture2D" uid="uid://0adly6x7u3gl" path="res://assets/blood cell.png" id="1_upula"]
 
 [node name="bloodcell" type="RigidBody2D"]
 gravity_scale = 0.0
+script = ExtResource("1_h22qs")
 
 [node name="BloodCell" type="Sprite2D" parent="."]
 position = Vector2(0, 0.299999)

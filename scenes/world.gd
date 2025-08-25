@@ -2,14 +2,21 @@ extends Node
 
 @export var whitecell_scene: PackedScene
 @export var bloodcell_scene: PackedScene
+@export var PlayerScene: PackedScene
+@export var StartPositions: Array[Node2D]
+
 var score
+var players = {}
 
 func _ready():
 	new_game()
 
 func new_game():
 	score = 0
-	$Player.start($StartPosition.position)
+	for p in players.values():
+		p.queue_free()
+	players.clear()
+	spawn_player(1, StartPositions[0].position)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
@@ -21,6 +28,16 @@ func _on_player_hit() -> void:
 	$WhiteCellTimer.stop()
 	$BloodCellTimer.stop()
 	$HUD.show_game_over()
+	
+func spawn_player(id: int, pos: Vector2):
+	var player = PlayerScene.instantiate()
+	add_child(player)
+	player.global_position = pos
+	player.name = "Player_%s" % id
+	players[id] = player
+	
+	player.hit.connect(_on_player_hit)
+	player.blood_collected.connect(_on_player_blood_collected)
 
 func _on_white_cell_timer_timeout() -> void:
 	var white_cell = whitecell_scene.instantiate()

@@ -22,8 +22,3 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	position = position.clamp(Vector2.ZERO, screen_size)
-	
-func start(pos):
-	position = pos
-	$playerarea.show()
-	$playerarea/CollisionShape2D.disabled = false

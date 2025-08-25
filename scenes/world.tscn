@@ -14,18 +14,18 @@ _data = {
 }
 point_count = 5
 
-[node name="World" type="Node"]
+[node name="World" type="Node" node_paths=PackedStringArray("StartPositions")]
 script = ExtResource("1_rwgxs")
 whitecell_scene = ExtResource("2_4wyf3")
 bloodcell_scene = ExtResource("3_qfnet")
+PlayerScene = ExtResource("1_nnsk1")
+StartPositions = [NodePath("StartPosition")]
 
 [node name="BackgroundMusic" parent="." instance=ExtResource("3_71j4m")]
-
-[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(560, 301)
+volume_db = -5.0
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(563, 301)
+position = Vector2(576, 320)
 
 [node name="WhiteCellTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -53,8 +53,8 @@ position = Vector2(576, 324)
 stream = ExtResource("7_i7141")
 volume_db = -3.0
 
-[connection signal="blood_collected" from="Player" to="." method="_on_player_blood_collected"]
-[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[node name="PositionPlayer2" type="Marker2D" parent="."]
+
 [connection signal="timeout" from="WhiteCellTimer" to="." method="_on_white_cell_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
